@@ -59,7 +59,7 @@ async function getRadarStartEndTime() {
   return [new Date(data[0]), new Date(data[1])];
 }
 
-let frameRate = 1.0; // frames per second
+let frameRate = 3.0; // frames per second
 let animationId = null;
 let startTime = null;
 let endTime = null;
@@ -93,8 +93,11 @@ let map = new ol.Map({
   target: "map",
   layers: layers,
   view: new ol.View({
-    center: ol.proj.fromLonLat([-93, 48]),
-    zoom: 5
+    //center: ol.proj.fromLonLat([-93, 48]),
+    //zoom: 5
+	// SW Ontario
+	center: ol.proj.fromLonLat([-80, 43.3]),
+    zoom: 7.5
   })
 });
 
@@ -104,12 +107,13 @@ function updateInfo(current_time) {
 }
 
 function setTime() {
+  var mins = 10;
   if (current_time === null) {
     current_time = startTime;
-  } else if (current_time >= endTime) {
+  } else if (current_time > endTime) {
     current_time = startTime;
   } else {
-    new_time = new Date(current_time.getTime() + 10*60000);
+    new_time = new Date(current_time.getTime() + mins*60000);
     current_time = new_time;
   }
   layers[1]
@@ -136,7 +140,7 @@ let pause = function () {
 
 let play = function () {
   stop();
-  animationId = window.setInterval(setTime, 200 / frameRate);
+  animationId = window.setInterval(setTime, 1000 / frameRate);
 };
 
 let startButton = document.getElementById("play");
