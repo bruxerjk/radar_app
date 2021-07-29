@@ -1,4 +1,4 @@
-## Test Radar App 
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <style>
@@ -107,13 +107,13 @@ function updateInfo(current_time) {
 }
 
 function setTime() {
-  var mins = 10;
+  var minutes = 10;
   if (current_time === null) {
     current_time = startTime;
   } else if (current_time > endTime) {
     current_time = startTime;
   } else {
-    new_time = new Date(current_time.getTime() + mins*60000);
+    new_time = new Date(current_time.getTime() + minutes*60000);
     current_time = new_time;
   }
   layers[1]
@@ -152,3 +152,4 @@ pauseButton.addEventListener("click", pause, false);
 </script>
 
 </body>
+</html>
